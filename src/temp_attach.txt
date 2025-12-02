@@ -1,0 +1,49 @@
+// 단순화된 attachBubble 로직
+
+// 1. 충돌 지점 (x, y)에 가장 가까운 빈 육각형 그리드 찾기
+// 2. 그 위치에 버블 추가
+// 3. 반드시 기존 버블에 인접해야 함
+
+const attachBubble = (x, y, color, type) => {
+  // 모든 가능한 그리드 위치를 순회
+  let bestRow = -1;
+  let bestCol = -1;
+  let minDist = Infinity;
+  
+  for (let row = 0; row < ROWS; row++) {
+    for (let col = 0; col < COLS; col++) {
+      // 이미 차있으면 스킵
+      if (bubbles.some(b => b.row === row && b.col === col)) continue;
+      
+      // 그리드 좌표 계산
+      const offsetX = row % 2 === 0 ? 0 : BUBBLE_RADIUS;
+      const gridX = col * BUBBLE_SPACING + BUBBLE_RADIUS + offsetX;
+      const gridY = row * ROW_HEIGHT + BUBBLE_RADIUS + TOP_PADDING;
+      
+      // 거리 계산
+      const dist = Math.sqrt((x - gridX) ** 2 + (y - gridY) ** 2);
+      
+      // 인접 버블이 있는지 확인
+      const hasNeighbor = row === 0 || getHexNeighbors(row, col).some(({row: nRow, col: nCol}) => {
+        return bubbles.some(b => b.row === nRow && b.col === nCol);
+      });
+      
+      if (hasNeighbor && dist < minDist) {
+        minDist = dist;
+        bestRow = row;
+        bestCol = col;
+      }
+    }
+  }
+  
+  // 위치에 버블 추가
+  const offsetX = bestRow % 2 === 0 ? 0 : BUBBLE_RADIUS;
+  const newBubble = {
+    x: bestCol * BUBBLE_SPACING + BUBBLE_RADIUS + offsetX,
+    y: bestRow * ROW_HEIGHT + BUBBLE_RADIUS + TOP_PADDING,
+    color,
+    type,
+    row: bestRow,
+    col: bestCol
+  };
+}

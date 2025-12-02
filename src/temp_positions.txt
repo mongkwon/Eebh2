@@ -1,0 +1,11 @@
+// 위치 저장할 코드 추가할 부분
+
+positions.push({ x: balloonRibbonX, y: balloonRibbonY });
+positions.push({ x: balloonDotX, y: balloonDotY });
+positions.push({ x: balloonMiniX, y: balloonMiniY });
+positions.push({ x: balloonHeartX, y: balloonHeartY });
+positions.push({ x: balloonFlowerX, y: balloonFlowerY });
+positions.push({ x: balloonStripedX, y: balloonStripedY });
+positions.push({ x: balloonStarX, y: balloonStarY });
+
+balloonSegmentPositionsRef.current = positions;

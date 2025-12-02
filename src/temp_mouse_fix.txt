@@ -1,0 +1,26 @@
+  const handleCanvasMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    if (shootingBubble || gameState !== "playing" || isPaused) return;
+
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+
+    // 캔버스의 표시 크기 대비 실제 해상도 비율 계산
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    
+    const shooterX = REFERENCE_WIDTH / 2;
+    const shooterY = REFERENCE_HEIGHT - 60;
+
+    // 마우스 좌표를 캔버스 해상도 좌표로 변환
+    const canvasMouseX = mouseX * scaleX;
+    const canvasMouseY = mouseY * scaleY;
+
+    const newAngle = Math.atan2(canvasMouseY - shooterY, canvasMouseX - shooterX);
+    
+    // 각도를 제한하지 않고 그대로 저장 (조준선이 마우스를 정확히 따라가도록)
+    setAngle(newAngle);
+  };

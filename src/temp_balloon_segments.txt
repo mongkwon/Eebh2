@@ -1,0 +1,18 @@
+풍선 그림 조각 이미지 8개 정보:
+
+1. 초록색 영역 - balloonSegment1
+2. 파란색 영역 - balloonSegment2  
+3. 노란색 영역 - balloonSegment3
+4. 노란색 큰 풍선 - balloonSegment4
+5. 보라색 영역 - balloonSegment5
+6. 빨간색 꽃 모양 - balloonSegment6
+7. 주황색 별 모양 - balloonSegment7
+8. 하늘색 줄무늬 풍선 - balloonSegment8
+
+각 이미지는 실제 색칠된 그림 조각이며, 
+투명하지 않은 부분이 해당 조각의 영역을 나타냅니다.
+
+구현 계획:
+1. 8개 조각을 합쳐서 완성본 생성
+2. 완성본에서 검은 선 추출하여 라인아트 생성
+3. 클릭 시 조각 판별하여 전체 색칠
